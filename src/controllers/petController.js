@@ -108,8 +108,8 @@ const petController = {
 
             const agendamentosAtivos = await agendamento.count({ where: { pet_id: id, status: { [require('sequelize').Op.notIn]: ['Finalizado', 'Cancelado'] }} });
             if (agendamentosAtivos > 0) {
-                return res.status(400).json({ error: 'Não é possível remover pet com agendamento ativos. Cancele os agendamentos primeiro.'} );
-
+                return res.status(400).json({ error: 'Não é possível remover pet com agendamento ativos. Cancele os agendamentos primeiro.'});
+            }
             await pet.destroy ({ where: { pet_id: id } });
 
             return res.status(200).json({ message: 'Pet removido com sucesso.', pet_removido: { id: petExistente.pet_id, nome: petExistente.nome} });

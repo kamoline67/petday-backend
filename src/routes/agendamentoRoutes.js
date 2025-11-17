@@ -59,3 +59,6 @@ router.get('/:id',
 
 router.put('/:id', validarExistencia(models.agendamento, 'agendamento_id', 'Agendamento', 'body'), agendamentoController.atualizarStatusAgendamento);
 router.delete('/:id', validarExistencia(model.agendamento, 'agendamento_id', 'Agendamento', 'body'), agendamentoController.removerAgendamento);
+
+
+module.exports = router;

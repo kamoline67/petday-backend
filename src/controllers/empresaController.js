@@ -115,8 +115,6 @@ const empresaController = {
             const { id } = req.params;
 
             const empresaExistente = req.empresaExistente;
-
-            // Verificar se existem serviços ativos
             const servicosAtivos = await servico.count({ 
                 where: { 
                     empresa_id: id,
@@ -146,4 +144,4 @@ const empresaController = {
     }
 };
 
-module.exports = { empresaController };
+module.exports = { empresaController, models: { empresa, servico } };

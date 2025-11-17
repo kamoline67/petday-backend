@@ -11,8 +11,8 @@ router.post('/',
 );
 
 router.get('/', clienteController.listarClientes);
-router.get('/:id', validarExistencia(cliente, 'id', 'Cliente'), clienteController.buscarClienteId);
-router.put('/:id', validarExistencia(cliente, 'id', 'Cliente'), clienteController.atualizarCliente);
-router.delete('/:id', validarExistencia(cliente, 'id', 'Cliente'), clienteController.removerCliente);
+router.get('/:id', validarExistencia(models.cliente, 'id', 'Cliente'), clienteController.buscarClienteId);
+router.put('/:id', validarExistencia(models.cliente, 'id', 'Cliente'), clienteController.atualizarCliente);
+router.delete('/:id', validarExistencia(models.cliente, 'id', 'Cliente'), clienteController.removerCliente);
 
 module.exports = router;
