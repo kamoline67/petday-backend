@@ -16,6 +16,10 @@ const agendamento = conexao.define('agendamento', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    empresa_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     data_hora: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,

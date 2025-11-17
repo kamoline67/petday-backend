@@ -45,6 +45,8 @@ const porteServicoController = {
                 ]
             });
 
+            return res.status(200).json({ message: 'Preco encontrados com sucesso.', precos: precos });
+
         } catch (error) {
             next(error);
         }

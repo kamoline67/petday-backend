@@ -7,7 +7,7 @@ const validarCamposObrigatorios = require('../middleware/validarCamposObrigatori
 
 router.post('/', 
             validarCamposObrigatorios([ 'empresa_id', 'tipo', 'descricao', 'duracao_min', 'precosPortes']),
-            validarExistencia(models.empresa, 'id', 'Empresa', 'params'),
+            validarExistencia(models.empresa, 'id', 'Empresa', 'body'),
             servicoController.criarServico
 );
 

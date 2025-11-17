@@ -4,7 +4,7 @@ const validarCamposObrigatorios = (camposObrigatorios) => {
             const camposFalta = [];
 
             for (const campo of camposObrigatorios) {
-                if (!req.body[campo]) {
+                if (!req.body[campo] || req.body[campo].toString().trim() === '') {
                     camposFalta.push(campo);
                 }
             }

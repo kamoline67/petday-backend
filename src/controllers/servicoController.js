@@ -105,7 +105,7 @@ const servicoController = {
             if (duracao_min) dadosAtualizacao.duracao_min = duracao_min;
             if (typeof ativo === 'boolean') dadosAtualizacao.ativo = ativo;
 
-            if (Object.keys(dadosAtualizacao).lenght === 0) {
+            if (Object.keys(dadosAtualizacao).length === 0) {
                 return res.status(400).json({ error: 'Nenhum dado fornecido para atualização.' });
             }
 
@@ -157,7 +157,7 @@ const servicoController = {
 
             const servicoExistente = req.servicoExistente;
 
-            await servico.destroy({ ativo: false }, { where: { servico_id: id } });
+            await servico.destroy({ where: { servico_id: id } });
 
             return res.status(200).json({
                 message: 'Servico excluido com sucesso.',

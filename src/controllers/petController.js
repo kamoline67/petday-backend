@@ -90,7 +90,7 @@ const petController = {
     
     async listarPetPorCliente(req, res, next) {
         try {
-            const {ClienteId} = req.params;
+            const { clienteId } = req.params;
 
             const pets = await pet.findAll({ where: { cliente_id: clienteId }, include: [{model: porte, attributes: ['descricao'] }], order: [['nome', 'ASC']] });
             

@@ -46,7 +46,7 @@ const pagamentoController = {
                 order: [['createdAt', 'DESC']]
             });
 
-            return res.status(200).json({ message: 'Pagamentos encontrados com sucesso.', quantidade: pagemento.length, pagamentos: pagamentos });
+            return res.status(200).json({ message: 'Pagamentos encontrados com sucesso.', quantidade: pagamentos.length, pagamentos: pagamentos });
 
         } catch (error) {
             next(error);
@@ -80,9 +80,9 @@ const pagamentoController = {
             const { id } = req.params;
             const { status } = req.body;
 
-            pagamentoExistente = req.pagamentoExistente;
+            const pagamentoExistente = req.pagamentoExistente;
 
-            if(!['Pendente', 'Pago'].include(status)) {
+            if(!['Pendente', 'Pago'].includes(status)) {
                 return res.status(400).json({ error: 'Status inválido. Use "Pendente" ou "Pago".' });
             }
 

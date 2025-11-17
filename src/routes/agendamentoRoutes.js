@@ -9,6 +9,7 @@ router.post('/',
     validarCamposObrigatorios([ 'cliente_id', 'pet_id', 'data_hora', 'endereco_atendimento', 'transporte', 'servicos']),
     validarExistencia(models.cliente, 'cliente_id', 'Cliente', 'body'),
     validarExistencia(models.pet, 'pet_id', 'Pet', 'body'),
+    validarExistencia(models.empresa, 'empresa_id', 'Empresa', 'body'),
     agendamentoController.criarAgendamento
 );
 
@@ -19,7 +20,7 @@ router.get('/:id',
             models.agendamento,
             'agendamento_id',
             'Agendamento', 
-            'body',
+            'params',
             includes = [
                 { model: cliente, attributes: ['nome', 'telefone', 'email'] },
                 { model: pet, attributes: ['nome', 'especie', 'raca'] },
@@ -36,12 +37,12 @@ router.get('/:id',
         agendamentoController.buscarAgendamentoPorId
 );
 
-router.get('/:id', 
+router.get('/cliente/:clienteId', 
         validarExistencia(
             models.cliente,
             'cliente_id',
             'Cliente', 
-            'body',
+            'params',
             includes = [
                 { model: pet, attributes: ['nome', 'especie'] },
                 { 
@@ -58,7 +59,7 @@ router.get('/:id',
 );
 
 router.put('/:id', validarExistencia(models.agendamento, 'agendamento_id', 'Agendamento', 'body'), agendamentoController.atualizarStatusAgendamento);
-router.delete('/:id', validarExistencia(model.agendamento, 'agendamento_id', 'Agendamento', 'body'), agendamentoController.removerAgendamento);
+router.delete('/:id', validarExistencia(models.agendamento, 'agendamento_id', 'Agendamento', 'params'), agendamentoController.removerAgendamento);
 
 
 module.exports = router;

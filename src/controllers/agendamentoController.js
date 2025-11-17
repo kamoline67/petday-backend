@@ -12,6 +12,8 @@ const agendamentoController = {
 
             const clienteExistente = req.clienteExistente;
 
+            const empresaExistente = req.empresaExistente;
+
             if (!servicos || !Array.isArray(servicos) || servicos.length === 0) {
                 return res.status(400).json({ error: 'Lista serviços é obrigatória.' });
             }
@@ -52,7 +54,7 @@ const agendamentoController = {
                 return res.status(400).json({ error: 'O pet não pertence a este cliente.' });
             }
 
-            const novoAgendamento = await agendamento.create({...agendamentoData, endereco_atendimento: enderecoAtendimento, empresa_id: empresa_id});
+            const novoAgendamento = await agendamento.create({...agendamentoData, endereco_atendimento: enderecoAtendimento, empresa_id: empresa_id, status:'Agendado'});
             
             let subtotalTotal = 0;
             for(const item of servicos) {
