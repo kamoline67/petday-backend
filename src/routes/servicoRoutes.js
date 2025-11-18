@@ -7,15 +7,33 @@ const validarCamposObrigatorios = require('../middleware/validarCamposObrigatori
 
 router.post('/', 
             validarCamposObrigatorios([ 'empresa_id', 'tipo', 'descricao', 'duracao_min', 'precosPortes']),
-            validarExistencia(models.empresa, 'id', 'Empresa', 'body'),
+            validarExistencia(models.empresa, 'empresa_id', 'Empresa', 'body'),
             servicoController.criarServico
 );
 
-router.get('/', servicoController.listarServicos);
-router.get('/:id', validarExistencia(models.servico, 'id', 'Servico'), servicoController.buscarServicoPorId);
-router.put('/:id', validarExistencia(models.servico, 'id', 'Servico'), servicoController.atualizarServico);
-router.put('/:id', validarExistencia(models.servico, 'id', 'Servico'), servicoController.desativarServico);
-router.delete('/:id', validarExistencia(models.servico, 'id', 'Servico'), servicoController.removerServico);
+router.get('/',
+    servicoController.listarServicos
+);
+
+router.get('/:id',
+    validarExistencia(models.servico, 'id', 'Servico'),
+    servicoController.buscarServicoPorId
+);
+
+router.put('/:id',
+    validarExistencia(models.servico, 'id', 'Servico'),
+    servicoController.atualizarServico
+);
+
+router.put('/:id',
+    validarExistencia(models.servico, 'id', 'Servico'),
+    servicoController.desativarServico
+);
+
+router.delete('/:id',
+    validarExistencia(models.servico, 'id', 'Servico'),
+    servicoController.removerServico
+);
 
 module.exports = router;
 

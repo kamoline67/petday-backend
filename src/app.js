@@ -1,11 +1,25 @@
 const express = require('express');
 const app = express();                         // utilização do express
+const helmet = require('helmet');
+const cors = require('cors');
+
+app.use(helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin"}
+}));
+
+app.use(cors({
+    origin: process.env.FRONTEND_URL || ['http://localhost:3000', 'http://localhost:3001'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 
 // Rotas
 
+app.use('api/auth', require('./routes/authRoutes'));
 app.use('/api/clientes', require('./routes/clienteRoutes'));
 app.use('/api/pets', require('./routes/petRoutes'));
 app.use('/api/servicos', require('./routes/servicoRoutes'));

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const { clienteController, models } = require('../controllers/clienteController');
+const authMiddleware = require('../middleware/authMiddleware');
 const validarExistencia = require('../middleware/validarExistencia');
 const validarCamposObrigatorios = require('../middleware/validarCamposObrigatorios');
 
@@ -10,9 +11,30 @@ router.post('/',
     clienteController.criarCliente
 );
 
-router.get('/', clienteController.listarClientes);
-router.get('/:id', validarExistencia(models.cliente, 'id', 'Cliente'), clienteController.buscarClienteId);
-router.put('/:id', validarExistencia(models.cliente, 'id', 'Cliente'), clienteController.atualizarCliente);
-router.delete('/:id', validarExistencia(models.cliente, 'id', 'Cliente'), clienteController.removerCliente);
+router.get('/',
+    authMiddleware.verificarToken,
+    clienteController.listarClientes
+);
+
+router.get('/:id',
+    authMiddleware.verificarToken,
+    validarExistencia(models.cliente, 'id', 'Cliente'),
+    authMiddleware.verificarPropriedade(cliente, 'id'),
+    clienteController.buscarClienteId
+);
+
+router.put('/:id',
+    authMiddleware.verificarToken,
+    validarExistencia(models.cliente, 'id', 'Cliente'),
+    authMiddleware.verificarPropriedade(cliente, 'id'),
+    clienteController.atualizarCliente
+);
+
+router.delete('/:id',
+    authMiddleware.verificarToken,
+    validarExistencia(models.cliente, 'id', 'Cliente'),
+    authMiddleware.verificarPropriedade(cliente, 'id'),
+    clienteController.removerCliente
+);
 
 module.exports = router;

@@ -4,32 +4,38 @@ const router = express.Router();
 const { petController, models } = require('../controllers/petController');
 const validarExistencia = require('../middleware/validarExistencia');
 const validarCamposObrigatorios = require('../middleware/validarCamposObrigatorios');
+const authMiddleware = require('../middleware/authMiddleware');
 
 router.post('/',
     validarCamposObrigatorios([ 'cliente_id', 'nome', 'especie', 'idade', 'sexo', 'porte_id' ]),
-    validarExistencia(models.cliente, 'cliente_id', 'Cliente', 'body'),
+    authMiddleware.verificarPropriedade(cliente, 'cliente_id', 'body'),
+    validarExistencia(porte, 'porte_id', 'Porte', 'body'),
     petController.criarPet
 );
-router.get('/', petController.listarPets);
 
-router.get('/:id', validarExistencia(
-                                    models.pet, 'id', 'Pet', 'params',
-                                    [
-                                        {model: models.cliente, attributes: ['nome', 'telefone', 'email' ] },
-                                        {model: models.porte, attributes: ['descricao']},
-                                    ],
-                                ),
-                                petController.buscarPetPorId);
+router.get('/',
+    authMiddleware.verificarToken,
+    petController.listarPets
+);
 
-router.put('/:id', validarExistencia(
-                                    models.pet, 'id', 'Pet', 'params',
-                                    [ 
-                                        {model: models.cliente, attributes: ['nome', 'telefone', 'email' ] },
-                                        {model: models.porte, attributes: ['descricao']},
-                                    ]
-                                ),
-                                petController.atualizarPet);
+router.get('/:id',
+    authMiddleware.verificarToken,
+    validarExistencia(pet, 'id', 'Pet'),
+    authMiddleware.verificarPropriedade(pet, id),
+     petController.buscarPetPorId);
+
+router.put('/:id',
+    authMiddleware.verificarToken,
+    validarExistencia(pet, 'id', 'Pet'),
+    authMiddleware.verificarPropriedade(pet, 'id'),
+    petController.atualizarPet
+);
                                 
-router.delete('/:id', validarExistencia(models.pet, 'id', 'Pet'), petController.removerPet);
+router.delete('/:id',
+    authMiddleware.verificarToken,
+    validarExistencia(pet, 'id', 'Pet'),
+    authMiddleware.verificarPropriedade(pet, 'id'),
+    petController.removerPet
+);
 
 module.exports = router;
