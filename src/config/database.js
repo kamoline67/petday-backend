@@ -1,4 +1,3 @@
-
 const { Sequelize } = require('sequelize');
 
 const conexao = new Sequelize('dbpetday', 'root', '1234', {
