@@ -19,21 +19,21 @@ router.get('/',
 router.get('/:id',
     authMiddleware.verificarToken,
     validarExistencia(models.cliente, 'id', 'Cliente'),
-    authMiddleware.verificarPropriedade(cliente, 'id'),
+    authMiddleware.verificarPropriedade(models.cliente, 'id'),
     clienteController.buscarClienteId
 );
 
 router.put('/:id',
     authMiddleware.verificarToken,
     validarExistencia(models.cliente, 'id', 'Cliente'),
-    authMiddleware.verificarPropriedade(cliente, 'id'),
+    authMiddleware.verificarPropriedade(models.cliente, 'id'),
     clienteController.atualizarCliente
 );
 
 router.delete('/:id',
     authMiddleware.verificarToken,
     validarExistencia(models.cliente, 'id', 'Cliente'),
-    authMiddleware.verificarPropriedade(cliente, 'id'),
+    authMiddleware.verificarPropriedade(models.cliente, 'id'),
     clienteController.removerCliente
 );
 

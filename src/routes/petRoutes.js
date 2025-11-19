@@ -8,8 +8,8 @@ const authMiddleware = require('../middleware/authMiddleware');
 
 router.post('/',
     validarCamposObrigatorios([ 'cliente_id', 'nome', 'especie', 'idade', 'sexo', 'porte_id' ]),
-    authMiddleware.verificarPropriedade(cliente, 'cliente_id', 'body'),
-    validarExistencia(porte, 'porte_id', 'Porte', 'body'),
+    authMiddleware.verificarPropriedade(models.cliente, 'cliente_id', 'body'),
+    validarExistencia(models.porte, 'porte_id', 'Porte', 'body'),
     petController.criarPet
 );
 
@@ -26,15 +26,15 @@ router.get('/:id',
 
 router.put('/:id',
     authMiddleware.verificarToken,
-    validarExistencia(pet, 'id', 'Pet'),
-    authMiddleware.verificarPropriedade(pet, 'id'),
+    validarExistencia(models.pet, 'id', 'Pet'),
+    authMiddleware.verificarPropriedade(models.pet, 'id'),
     petController.atualizarPet
 );
                                 
 router.delete('/:id',
     authMiddleware.verificarToken,
-    validarExistencia(pet, 'id', 'Pet'),
-    authMiddleware.verificarPropriedade(pet, 'id'),
+    validarExistencia(models.pet, 'id', 'Pet'),
+    authMiddleware.verificarPropriedade(models.pet, 'id'),
     petController.removerPet
 );
 
