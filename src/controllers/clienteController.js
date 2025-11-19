@@ -47,6 +47,11 @@ const clienteController = {
                 if (!emailValido.valido) {
                     return res.status(400).json ({ error: emailValido.erro });
                 }
+            
+            const emailExistente = await cliente.findOne({ where: { email: email } });
+                if (emailExistente) {
+                    return res.status(400).json ({ error: 'Email já cadastrado. Utilize outro email.' });
+                }
 
             const senhaHash = await bcrypt.hash(senha, 10);
 
@@ -145,10 +150,17 @@ const clienteController = {
 
             if (email) {
                 if (email !== clienteExistente.email) {
+                    
                     const  emailValido = await validarEmailcomDNS(email);
                     if (!emailValido.valido) {
                         return res.status(400).json({ error: emailValido.erro });
                     }
+
+                    const emailExistente = await cliente.findOne({ where: { email: email } });
+                    if (emailExistente) {
+                        return res.status(400).json({ error: 'Email já cadastrado. Utilize outro email.' });
+                    }
+
                     dadosAtualizacao.email = email;
                 }
             }

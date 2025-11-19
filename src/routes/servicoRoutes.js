@@ -25,7 +25,7 @@ router.put('/:id',
     servicoController.atualizarServico
 );
 
-router.put('/:id',
+router.put('/:id/desativar',
     validarExistencia(models.servico, 'id', 'Servico'),
     servicoController.desativarServico
 );

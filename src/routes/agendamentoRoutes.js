@@ -24,10 +24,10 @@ router.get('/:id',
             'Agendamento', 
             'params',
             [
-                { model: cliente, attributes: ['nome', 'telefone', 'email'] },
-                { model: pet, attributes: ['nome', 'especie', 'raca'] },
+                { model: models.cliente, attributes: ['nome', 'telefone', 'email'] },
+                { model: models.pet, attributes: ['nome', 'especie', 'raca'] },
                 { 
-                    model: servico, 
+                    model: models.servico, 
                     as: 'servicos',
                     through: { 
                         attributes: ['preco_unitario', 'subtotal', 'observacao'],
@@ -46,9 +46,9 @@ router.get('/cliente/:clienteId',
             'Cliente', 
             'params',
             [
-                { model: pet, attributes: ['nome', 'especie'] },
+                { model: models.pet, attributes: ['nome', 'especie'] },
                 { 
-                    model: servico, 
+                    model: models.servico, 
                     as: 'servicos',
                     through: { 
                         attributes: ['preco_unitario']

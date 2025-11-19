@@ -36,7 +36,7 @@ const agendamentoController = {
                 if (!enderecoEmpresa) {
                     return res.status(400).json({ error: 'Empresa não possui endereço cadastrado. Cadastre um endereço para a empresa primeiro.' })
                 }
-                enderecoAtendimento = this.formatarEndereco(enderecoEmpresa);
+                enderecoAtendimento = agendamentoController.formatarEndereco(enderecoEmpresa);
             }   
 
             const dataAgendamento = new Date(data_hora);
