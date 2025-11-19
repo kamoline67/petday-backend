@@ -20,8 +20,8 @@ router.get('/',
 
 router.get('/:id',
     authMiddleware.verificarToken,
-    validarExistencia(pet, 'id', 'Pet'),
-    authMiddleware.verificarPropriedade(pet, id),
+    validarExistencia(models.pet, 'id', 'Pet'),
+    authMiddleware.verificarPropriedade(models.pet, 'id'),
      petController.buscarPetPorId);
 
 router.put('/:id',
