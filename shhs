@@ -1,0 +1,12 @@
+PORT=3000
+NODE_ENV=development
+FRONTEND_URL=http://localhost:3001
+
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=1234
+DB_NAME=dbpetday
+DB_DIALECT=mysql
+
+JWT_SECRET=seu_jwt_secret_super_seguro_aqui_altere_isto
+JWT_EXPIRES_IN=7d

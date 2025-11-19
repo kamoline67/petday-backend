@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 
-const conexao = new Sequelize('dbpetday', 'root', '1234', {
+const conexao = new Sequelize('dbpetday', 'root', 'escola', {
   host: 'localhost',
   dialect: 'mysql',
 });
@@ -13,4 +13,4 @@ conexao.authenticate()
     console.error('Erro ao conectar com MySQL.', err);
   });
 
-module.exports = conexao; // exporta a instância do Sequelize
+module.exports = conexao;

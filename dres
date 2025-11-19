@@ -1,7 +1,7 @@
 {
-  "name": "petday-backend",
+  "name": "petshop-backend",
   "version": "1.0.0",
-  "description": "Backend do sistema de agendamento para petshop.",
+  "description": "Backend do sistema de agendamento para petshop",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

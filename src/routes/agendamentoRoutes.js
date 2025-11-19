@@ -31,7 +31,7 @@ router.get('/:id',
                     as: 'servicos',
                     through: { 
                         attributes: ['preco_unitario', 'subtotal', 'observacao'],
-                        include: [{ model: porte, attributes: ['descricao'] }]
+                        include: [{ model: models.porte, attributes: ['descricao'] }]
                     }
                 }
             ]
