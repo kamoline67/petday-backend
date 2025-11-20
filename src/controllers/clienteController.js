@@ -1,6 +1,6 @@
 const { cliente, agendamento, pet, endereco } = require('../models');
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const validator = require('validator');
 const dns = require('dns');
 
