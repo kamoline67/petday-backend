@@ -1,5 +1,6 @@
 const { Op } = require('sequelize');
 const { agendamento, agendamento_servico, porte_servico, cliente, pet, porte, servico, empresa, endereco } = require('../models');
+const { validarConflitoAgendamento } = require('../middleware/validarConflito');
 
 const agendamentoController = {
 
@@ -46,6 +47,13 @@ const agendamentoController = {
 
             if (dataAgendamento <= new Date()) {
                 return res.status(400).json({ error: 'A data do agendamento deve ser futura.' });
+            }
+
+            const conflito = await validarConflitoAgendamento(empresa_id, dataAgendamento);
+
+            if (conflito) {
+                return res.status(400).json({ error: 'Já existe um agendamento para este horário.'});
+                
             }
 
             const petExistente = req.petExistente;

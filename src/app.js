@@ -36,4 +36,7 @@ app.get('/health', (req, res) => {
     res.status(200).json({ stautus: 'OK', message: 'Sistema funcionando.' });
 });
 
+const swaggerSetup = require('./config/swagger');
+swaggerSetup(app);
+
 module.exports = app;
